@@ -1,0 +1,11 @@
+5
+Soldatul_Umbrelor
+2 2 3
+Magul_Flacarii
+3 3 2
+Pazitorul_Padurii
+1 1 2
+Razboinicul_Pietrei
+4 4 4
+Elfa_Vantului
+2 3 1

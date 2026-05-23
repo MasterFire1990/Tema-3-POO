@@ -1,0 +1,17 @@
+4
+Sageata_Arcanica
+2
+DAMAGE
+3
+Raza_de_Vindecare
+3
+HEAL
+5
+Forta_Razboinicului
+2
+BUFF_ATTACK
+2
+Scutul_Vietii
+3
+BUFF_HEALTH
+3
