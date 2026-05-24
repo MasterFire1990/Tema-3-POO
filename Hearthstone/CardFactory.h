@@ -5,7 +5,7 @@
 
 class CardFactory {
 public:
-    // Creates a card from type string + raw attributes (used when loading from file)
+    
     static std::unique_ptr<Card> create(
         const std::string& type,
         const std::string& name,
@@ -17,7 +17,7 @@ public:
         const std::string& title = ""
     );
 
-    // Creates an empty card of given type for interactive input
+    
     static std::unique_ptr<Card> createEmpty(const std::string& type);
 
 private:

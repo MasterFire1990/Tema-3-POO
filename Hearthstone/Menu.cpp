@@ -19,7 +19,7 @@ static void cinClear() {
 
 Menu::Menu() {
     std::filesystem::create_directories(DATA_FOLDER);
-    // Singleton logger — shared_ptr wrapping the singleton reference
+    
     logger = std::shared_ptr<GameLogger>(&GameLogger::getInstance(), [](GameLogger*){});
     try { collection.loadFromFiles(DATA_FOLDER); } catch (...) {}
     try { loadAllUsers(); } catch (...) {}
@@ -29,7 +29,7 @@ void Menu::printSeparator() const {
     std::cout << "  --------------------------------------------------\n";
 }
 
-// ─── USERS ────────────────────────────────────────────────────────────────────
+
 
 void Menu::menuAddUser() {
     std::cout << "\n  Nume utilizator nou: ";
@@ -85,7 +85,7 @@ void Menu::menuUsers() {
     } while (opt != 0);
 }
 
-// ─── CARDS ────────────────────────────────────────────────────────────────────
+
 
 void Menu::menuAddCard() {
     std::cout << "\n  Tip carte (1=Adept, 2=Spell, 3=Legend): ";
@@ -145,7 +145,7 @@ void Menu::menuCards() {
     } while (opt != 0);
 }
 
-// ─── DECKS ────────────────────────────────────────────────────────────────────
+
 
 void Menu::menuSelectUserForDeck(User*& selectedUser) {
     if (users.empty()) { std::cout << "  [INFO] Nu exista utilizatori.\n"; return; }
@@ -246,14 +246,14 @@ void Menu::menuDecks() {
     } while (opt != 0);
 }
 
-// ─── STATS ────────────────────────────────────────────────────────────────────
+
 
 void Menu::menuStats() {
     std::cout << "\n  === STATISTICI ===\n";
     std::cout << "  Utilizatori: " << users.size() << "\n";
     std::cout << "  Carti in colectie: " << collection.getCount() << "\n";
 
-    // Template function countIf used here — counts cards by type
+    
     int adepts  = countIf<Card>(collection.getRepository(),
         [](const Card& c) { return c.getType() == "Adept"; });
     int spells  = countIf<Card>(collection.getRepository(),
@@ -270,7 +270,7 @@ void Menu::menuStats() {
     std::cout << "  Total deck-uri: " << totalDecks << "\n";
 }
 
-// ─── GAME ─────────────────────────────────────────────────────────────────────
+
 
 void Menu::menuGame() {
     if (users.size() < 2) { std::cout << "  [INFO] Ai nevoie de cel putin 2 utilizatori.\n"; return; }
@@ -307,7 +307,7 @@ void Menu::menuGame() {
     } catch (const HearthstoneException& e) { std::cout << "  [ERR] " << e.what() << "\n"; }
 }
 
-// ─── PERSISTENCE ──────────────────────────────────────────────────────────────
+
 
 void Menu::saveAllUsers() const {
     std::filesystem::create_directories(DATA_FOLDER);
@@ -333,7 +333,7 @@ void Menu::loadAllUsers() {
     }
 }
 
-// ─── MAIN LOOP ────────────────────────────────────────────────────────────────
+
 
 void Menu::run() {
     int opt;

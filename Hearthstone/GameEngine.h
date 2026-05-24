@@ -16,7 +16,7 @@ class GameEngine {
     std::vector<std::unique_ptr<Card>> hands[2];
     std::unique_ptr<Board>  board;
 
-    // Observer pattern — weak_ptr to avoid owning the logger
+    
     std::vector<std::weak_ptr<IGameObserver>> observers;
 
     int currentMana[2];

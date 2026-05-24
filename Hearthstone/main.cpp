@@ -10,7 +10,7 @@
 #include <iostream>
 #include <memory>
 
-// ── Demonstrare Repository<T> instantiat cu 2 tipuri diferite ─────────────────
+
 
 static void demonstrateRepositoryWithCards() {
     std::cout << "\n=== Repository<Card> ===\n";
@@ -24,16 +24,16 @@ static void demonstrateRepositoryWithCards() {
     std::cout << "Toate cartile:\n";
     displayAll(cardRepo, std::cout);
 
-    // findByName — functie template cu Named concept
+    
     Card* found = findByName(cardRepo, "Magul");
     if (found) std::cout << "Gasit: " << *found << "\n";
 
-    // countIf — functie template
+    
     int adeptCount = countIf<Card>(cardRepo,
         [](const Card& c) { return c.getType() == "Adept"; });
     std::cout << "Numar adepti: " << adeptCount << "\n";
 
-    // sortBy mana cost
+    
     cardRepo.sortBy([](const Card& a, const Card& b) {
         return a.getManaCost() < b.getManaCost();
     });
@@ -52,14 +52,14 @@ static void demonstrateRepositoryWithPlayers() {
     std::cout << "Toti playerii:\n";
     displayAll(playerRepo, std::cout);
 
-    // findByName cu Named concept — Player are getName()
+    
     Player* found = findByName(playerRepo, "Bob");
     if (found) {
         found->takeDamage(5);
         std::cout << "Bob dupa damage: " << *found << "\n";
     }
 
-    // countIf — playeri in viata
+    
     int alive = countIf<Player>(playerRepo,
         [](const Player& p) { return p.isAlive(); });
     std::cout << "Playeri in viata: " << alive << "\n";
@@ -75,7 +75,7 @@ static void demonstratePolymorphism() {
 
     for (const auto& c : cards) {
         std::cout << "Tip: " << c->getType() << " | ";
-        c->play();  // apel virtual polimorfic
+        c->play();  
     }
 }
 

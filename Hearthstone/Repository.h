@@ -7,7 +7,7 @@
 #include <functional>
 #include <optional>
 
-// C++20 concept: T must have getName() returning string
+
 template<typename T>
 concept Named = requires(const T& t) {
     { t.getName() } -> std::convertible_to<std::string>;
@@ -48,14 +48,14 @@ public:
 
     void clear() { items.clear(); }
 
-    // Finds first item matching predicate
+    
     T* findIf(std::function<bool(const T&)> predicate) const {
         auto it = std::find_if(items.begin(), items.end(),
             [&](const std::unique_ptr<T>& p) { return predicate(*p); });
         return it != items.end() ? it->get() : nullptr;
     }
 
-    // Sort by comparator
+    
     void sortBy(std::function<bool(const T&, const T&)> cmp) {
         std::sort(items.begin(), items.end(),
             [&](const std::unique_ptr<T>& a, const std::unique_ptr<T>& b) {
@@ -63,13 +63,13 @@ public:
             });
     }
 
-    // Range-based for support
+    
     auto begin() { return items.begin(); }
     auto end()   { return items.end(); }
     auto begin() const { return items.cbegin(); }
     auto end()   const { return items.cend(); }
 
-    // Clone-based copy for types that support clone()
+    
     template<typename U = T>
     void cloneFrom(const Repository<U>& other)
         requires requires(const U& u) { u.clone(); }
@@ -80,9 +80,9 @@ public:
     }
 };
 
-// --- Template free functions ---
 
-// Print all items in a repository (T must have operator<<)
+
+
 template<typename T>
 void displayAll(const Repository<T>& repo, std::ostream& os) {
     if (repo.size() == 0) { os << "  (gol)\n"; return; }
@@ -90,13 +90,13 @@ void displayAll(const Repository<T>& repo, std::ostream& os) {
         os << "  " << (i + 1) << ". " << *repo.get(i) << "\n";
 }
 
-// Find by name — requires T to satisfy Named concept
+
 template<Named T>
 T* findByName(const Repository<T>& repo, const std::string& name) {
     return repo.findIf([&](const T& item) { return item.getName() == name; });
 }
 
-// Count items matching a predicate
+
 template<typename T>
 int countIf(const Repository<T>& repo, std::function<bool(const T&)> predicate) {
     int count = 0;
