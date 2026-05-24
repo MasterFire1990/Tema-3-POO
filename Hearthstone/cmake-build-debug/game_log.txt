@@ -1,0 +1,25 @@
+[23:34:05] === Sesiune noua ===
+[23:34:05] TURA 1: Alice joaca
+[23:34:05] PLAY: Minion [Soldatul] pus pe tabla
+[23:34:05] DAMAGE: Bob primeste 3 damage
+[23:39:51] TURA 1: Adrian joaca
+[23:40:01] TURA 2: Alex joaca
+[23:40:04] TURA 3: Adrian joaca
+[23:40:17] PLAY: Minion [Elfa_Vantului] pus pe tabla
+[23:40:46] TURA 4: Alex joaca
+[23:40:57] PLAY: Minion [Pazitorul_Padurii] pus pe tabla
+[23:41:13] DAMAGE: Adrian primeste 1 damage
+[23:41:17] TURA 5: Adrian joaca
+[23:41:24] DAMAGE: Alex primeste 3 damage
+[23:41:34] MORT: Elfa_Vantului
+[23:41:34] MORT: Pazitorul_Padurii
+[23:41:39] DAMAGE: Alex primeste 1 damage
+[23:41:39] TURA 6: Alex joaca
+[23:41:41] TURA 7: Adrian joaca
+[23:44:28] GAME OVER: Castigator -> Alex
+[23:44:34] === Sesiune incheiata ===
+[23:44:46] === Sesiune noua ===
+[23:44:46] TURA 1: Alice joaca
+[23:44:46] PLAY: Minion [Soldatul] pus pe tabla
+[23:44:46] DAMAGE: Bob primeste 3 damage
+[23:45:46] === Sesiune incheiata ===

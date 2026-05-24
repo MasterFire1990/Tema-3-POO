@@ -1,23 +1,23 @@
 #pragma once
 #include "Deck.h"
 #include <vector>
+#include <memory>
 #include <string>
 
 class User {
     std::string username;
-    std::vector<Deck*> decks;
-
-    void clearDecks();
-    void copyDecks(const std::vector<Deck*>& src);
+    std::vector<std::unique_ptr<Deck>> decks;
 
 public:
     User();
     explicit User(const std::string& username);
     User(const User& other);
     User& operator=(const User& other);
-    ~User();
+    User(User&&) = default;
+    User& operator=(User&&) = default;
+    ~User() = default;
 
-    std::string getUsername() const;
+    std::string getName() const;
     void setUsername(const std::string& name);
 
     int getDeckCount() const;

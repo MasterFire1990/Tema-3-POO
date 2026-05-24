@@ -1,0 +1,35 @@
+# ninja log v7
+33	1228	8012591284181712	CMakeFiles/Hearthstone.dir/Card.cpp.obj	fc43272e42344027
+41	1260	8012591284262308	CMakeFiles/Hearthstone.dir/Adept.cpp.obj	b084c7131d948d78
+61	1395	8012591284462503	CMakeFiles/Hearthstone.dir/Legend.cpp.obj	9601e32ae1dcab33
+50	1341	8012591284352400	CMakeFiles/Hearthstone.dir/Spell.cpp.obj	d13c14b2aa24c219
+23	2672	8012591284091156	CMakeFiles/Hearthstone.dir/main.cpp.obj	b5b7fde66b3cbc8c
+2102	4154	8012533187781418	CMakeFiles/Hearthstone.dir/Player.cpp.obj	e0c74231418344bc
+1260	3229	8012591296456142	CMakeFiles/Hearthstone.dir/Board.cpp.obj	8b7dbb849f15713e
+71	3484	8012591284562512	CMakeFiles/Hearthstone.dir/User.cpp.obj	92a2b00d10643863
+1230	4398	8012591296146029	CMakeFiles/Hearthstone.dir/CardCollection.cpp.obj	56c2a9447d0a3db5
+2399	6608	8012533190740523	CMakeFiles/Hearthstone.dir/GameEngine.cpp.obj	9488a083db42d70f
+2672	5022	8012591310578952	CMakeFiles/Hearthstone.dir/Deck.cpp.obj	8467642667a45d08
+1395	5185	8012591297806622	CMakeFiles/Hearthstone.dir/Menu.cpp.obj	8b2aab1c31b52282
+8526	9557	8012533252019752	Hearthstone.exe	f3819711164b0c93
+3484	4791	8012591318695369	CMakeFiles/Hearthstone.dir/CardFactory.cpp.obj	5335af71c30b0f08
+3229	5613	8012591316144833	CMakeFiles/Hearthstone.dir/GameLogger.cpp.obj	784530d2ecc64df8
+3	300	8013615756483247	build.ninja	9ee5f2643ce7fba6
+3	300	8013615756363277	C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone/cmake-build-debug/cmake_install.cmake	9ee5f2643ce7fba6
+109	1622	8013615794981035	CMakeFiles/hearthstone.dir/Player.cpp.obj	852c809774f4bf10
+34	1631	8013615794230879	CMakeFiles/hearthstone.dir/Adept.cpp.obj	a84e96fcd1ebaa4d
+64	1634	8013615794530909	CMakeFiles/hearthstone.dir/Legend.cpp.obj	5542a9cf6ee34096
+18	1635	8013615794067064	CMakeFiles/hearthstone.dir/Card.cpp.obj	78c4c19fffea2465
+46	1645	8013615794340897	CMakeFiles/hearthstone.dir/Spell.cpp.obj	656e566c19d6361f
+101	2441	8013616372651248	CMakeFiles/hearthstone.dir/Board.cpp.obj	4759102f6e8b7e72
+33	3275	8013616371966069	CMakeFiles/hearthstone.dir/Deck.cpp.obj	f7d83446b8c80938
+81	4153	8013616372441242	CMakeFiles/hearthstone.dir/CardCollection.cpp.obj	f080ae80b3128276
+24	4250	8013616371875946	CMakeFiles/hearthstone.dir/main.cpp.obj	7344467b745bf0ef
+125	4292	8013616372881222	CMakeFiles/hearthstone.dir/GameEngine.cpp.obj	e34d219a0b35097c
+52	4302	8013616372151232	CMakeFiles/hearthstone.dir/User.cpp.obj	f7575c852e456bd7
+3276	5074	8013616404396195	CMakeFiles/hearthstone.dir/CardFactory.cpp.obj	a65c53baf391d4d9
+2442	5374	8013616396057263	CMakeFiles/hearthstone.dir/GameLogger.cpp.obj	36f234cbdac0960a
+4154	6801	8013616413179880	CMakeFiles/hearthstone.dir/Menu.cpp.obj	14edfe16e730ea4b
+6801	7820	8013616439642646	hearthstone.exe	32649082507a99a7
+18	1861	8013622829969334	CMakeFiles/hearthstone.dir/GameEngine.cpp.obj	e34d219a0b35097c
+1862	2666	8013622848410358	hearthstone.exe	32649082507a99a7

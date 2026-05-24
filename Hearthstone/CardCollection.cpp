@@ -1,65 +1,43 @@
 #include "../Hearthstone/CardCollection.h"
+#include "../Hearthstone/CardFactory.h"
 #include "../Hearthstone/Adept.h"
 #include "../Hearthstone/Spell.h"
 #include "../Hearthstone/Legend.h"
+#include "../Hearthstone/Exceptions.h"
 #include <fstream>
-#include <stdexcept>
 #include <iostream>
 #include <filesystem>
 
-void CardCollection::clearCards() {
-    for (Card* c : cards) delete c;
-    cards.clear();
-}
-
-CardCollection::CardCollection() {}
-
 CardCollection::CardCollection(const CardCollection& other) {
-    for (Card* c : other.cards)
-        cards.push_back(c->clone());
+    cards.cloneFrom(other.cards);
 }
 
 CardCollection& CardCollection::operator=(const CardCollection& other) {
-    if (this != &other) {
-        clearCards();
-        for (Card* c : other.cards)
-            cards.push_back(c->clone());
-    }
+    if (this != &other)
+        cards.cloneFrom(other.cards);
     return *this;
 }
 
-CardCollection::~CardCollection() { clearCards(); }
-
 void CardCollection::loadFromFiles(const std::string& dataFolder) {
-    clearCards();
+    cards.clear();
 
-    auto openFile = [](std::ifstream& f, const std::string& dataFolder, const std::string& name) {
-        f.open(dataFolder + "/" + name);
-        if (!f) {
-            f.clear();
-            f.open(name);
-        }
-        if (!f) {
-            f.clear();
-            f.open("../" + name);
-        }
+    auto tryOpen = [](const std::string& folder, const std::string& file) {
+        std::ifstream f(folder + "/" + file);
+        if (!f) f.open(file);
+        return f;
     };
 
-    std::ifstream fa;
-    openFile(fa, dataFolder, "adepts.txt");
-    if (fa) {
+    if (auto fa = tryOpen(dataFolder, "adepts.txt"); fa) {
         int count; fa >> count; fa.ignore();
         for (int i = 0; i < count; i++) {
             std::string name; int cost, atk, hp;
             std::getline(fa >> std::ws, name);
             fa >> cost >> atk >> hp; fa.ignore();
-            cards.push_back(new Adept(name, cost, atk, hp));
+            cards.add(CardFactory::create("Adept", name, cost, atk, hp));
         }
     }
 
-    std::ifstream fs;
-    openFile(fs, dataFolder, "spells.txt");
-    if (fs) {
+    if (auto fs = tryOpen(dataFolder, "spells.txt"); fs) {
         int count; fs >> count; fs.ignore();
         for (int i = 0; i < count; i++) {
             std::string name, effStr; int cost, val;
@@ -67,13 +45,11 @@ void CardCollection::loadFromFiles(const std::string& dataFolder) {
             fs >> cost; fs.ignore();
             std::getline(fs >> std::ws, effStr);
             fs >> val; fs.ignore();
-            cards.push_back(new Spell(name, cost, spellEffectFromString(effStr), val));
+            cards.add(CardFactory::create("Spell", name, cost, 0, 0, effStr, val));
         }
     }
 
-    std::ifstream fc;
-    openFile(fc, dataFolder, "legends.txt");
-    if (fc) {
+    if (auto fc = tryOpen(dataFolder, "legends.txt"); fc) {
         int count; fc >> count; fc.ignore();
         for (int i = 0; i < count; i++) {
             std::string name, effStr, title; int cost, atk, hp, val;
@@ -82,7 +58,7 @@ void CardCollection::loadFromFiles(const std::string& dataFolder) {
             std::getline(fc >> std::ws, effStr);
             fc >> val; fc.ignore();
             std::getline(fc >> std::ws, title);
-            cards.push_back(new Legend(name, cost, atk, hp, spellEffectFromString(effStr), val, title));
+            cards.add(CardFactory::create("Legend", name, cost, atk, hp, effStr, val, title));
         }
     }
 }
@@ -93,25 +69,27 @@ void CardCollection::saveToFiles(const std::string& dataFolder) const {
     std::ofstream fs(dataFolder + "/spells.txt");
     std::ofstream fc(dataFolder + "/legends.txt");
 
-    int ca = 0, cs = 0, cc = 0;
-    for (Card* c : cards) {
+    int ca = 0, cs = 0, cl = 0;
+    for (int i = 0; i < cards.size(); i++) {
+        const auto* c = cards.get(i);
         if (c->getType() == "Adept") ca++;
         else if (c->getType() == "Spell") cs++;
-        else if (c->getType() == "Legend") cc++;
+        else if (c->getType() == "Legend") cl++;
     }
-    fa << ca << "\n"; fs << cs << "\n"; fc << cc << "\n";
+    fa << ca << "\n"; fs << cs << "\n"; fc << cl << "\n";
 
-    for (Card* c : cards) {
+    for (int i = 0; i < cards.size(); i++) {
+        const auto* c = cards.get(i);
         if (c->getType() == "Adept") {
-            Adept* a = dynamic_cast<Adept*>(c);
+            const auto* a = dynamic_cast<const Adept*>(c);
             fa << a->getName() << "\n" << a->getManaCost() << " "
                << a->getAttack() << " " << a->getMaxHealth() << "\n";
         } else if (c->getType() == "Spell") {
-            Spell* s = dynamic_cast<Spell*>(c);
+            const auto* s = dynamic_cast<const Spell*>(c);
             fs << s->getName() << "\n" << s->getManaCost() << "\n"
                << spellEffectToString(s->getEffect()) << "\n" << s->getValue() << "\n";
         } else if (c->getType() == "Legend") {
-            Legend* ch = dynamic_cast<Legend*>(c);
+            const auto* ch = dynamic_cast<const Legend*>(c);
             fc << ch->getName() << "\n" << ch->getManaCost() << " "
                << ch->getAttack() << " " << ch->getMaxHealth() << "\n"
                << spellEffectToString(ch->getEffect()) << "\n" << ch->getValue() << "\n"
@@ -120,37 +98,27 @@ void CardCollection::saveToFiles(const std::string& dataFolder) const {
     }
 }
 
-int CardCollection::getCount() const { return static_cast<int>(cards.size()); }
+int CardCollection::getCount() const { return cards.size(); }
 
-Card* CardCollection::getCard(int index) const {
-    if (index < 0 || index >= static_cast<int>(cards.size()))
-        throw std::out_of_range("Invalid card index");
-    return cards[index];
-}
+Card* CardCollection::getCard(int index) const { return cards.get(index); }
 
 Card* CardCollection::findByName(const std::string& name) const {
-    for (Card* c : cards)
-        if (c->getName() == name) return c;
-    return nullptr;
+    return ::findByName(cards, name);
 }
 
-void CardCollection::addCard(Card* card) {
-    if (findByName(card->getName()) != nullptr)
-        throw std::runtime_error("Card already exists: " + card->getName());
-    cards.push_back(card->clone());
+void CardCollection::addCard(const Card& card) {
+    if (findByName(card.getName()))
+        throw DuplicateCardException(card.getName());
+    cards.add(std::unique_ptr<Card>(card.clone()));
 }
 
-void CardCollection::removeCard(int index) {
-    if (index < 0 || index >= static_cast<int>(cards.size()))
-        throw std::out_of_range("Invalid card index");
-    delete cards[index];
-    cards.erase(cards.begin() + index);
-}
+void CardCollection::removeCard(int index) { cards.remove(index); }
+
+const Repository<Card>& CardCollection::getRepository() const { return cards; }
 
 std::ostream& operator<<(std::ostream& os, const CardCollection& col) {
     os << "=== Card Collection (" << col.cards.size() << " carti) ===\n";
-    for (int i = 0; i < static_cast<int>(col.cards.size()); i++)
-        os << "  " << (i + 1) << ". " << *col.cards[i] << "\n";
+    displayAll(col.cards, os);
     return os;
 }
 
@@ -158,28 +126,10 @@ std::istream& operator>>(std::istream& is, CardCollection& col) {
     std::string type;
     std::cout << "Card type (Adept/Spell/Legend): ";
     is >> type;
-    Card* card = nullptr;
-    if (type == "Adept") {
-        Adept* a = new Adept();
-        is >> *a;
-        card = a;
-    } else if (type == "Spell") {
-        Spell* s = new Spell();
-        is >> *s;
-        card = s;
-    } else if (type == "Legend") {
-        Legend* ch = new Legend();
-        is >> *ch;
-        card = ch;
-    } else {
-        throw std::invalid_argument("Unknown card type: " + type);
-    }
+    auto card = CardFactory::createEmpty(type);
+    is >> *card;
     try {
-        col.addCard(card);
-        delete card;
-    } catch (...) {
-        delete card;
-        throw;
-    }
+        col.addCard(*card);
+    } catch (...) { throw; }
     return is;
 }

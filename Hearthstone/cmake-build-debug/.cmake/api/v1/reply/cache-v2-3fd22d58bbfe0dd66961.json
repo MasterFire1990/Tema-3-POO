@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 2/Tema-2-POO/Hearthstone/cmake-build-debug"
+			"value" : "c:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -591,7 +591,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 2/Tema-2-POO/Hearthstone/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -663,7 +663,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 2/Tema-2-POO/Hearthstone"
+			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1331,7 +1331,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 2/Tema-2-POO/Hearthstone/cmake-build-debug"
+			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone/cmake-build-debug"
 		},
 		{
 			"name" : "Hearthstone_IS_TOP_LEVEL",
@@ -1355,7 +1355,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 2/Tema-2-POO/Hearthstone"
+			"value" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone"
 		}
 	],
 	"kind" : "cache",

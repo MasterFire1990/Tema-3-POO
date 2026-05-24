@@ -1,22 +1,21 @@
 #pragma once
 #include "User.h"
 #include "CardCollection.h"
+#include "GameLogger.h"
 #include <vector>
+#include <memory>
 #include <string>
 
 class Menu {
-    std::vector<User*> users;
+    std::vector<std::unique_ptr<User>> users;
     CardCollection collection;
+    std::shared_ptr<GameLogger> logger;
 
     static const std::string DATA_FOLDER;
     static const std::string USERS_FILE;
 
-    void clearUsers();
-    void copyUsers(const std::vector<User*>& src);
-
     void printSeparator() const;
 
-    
     void menuUsers();
     void menuAddUser();
     void menuRemoveUser();
@@ -35,15 +34,16 @@ class Menu {
     void menuViewDecks(User* user);
 
     void menuGame();
+    void menuStats();
 
     void saveAllUsers() const;
     void loadAllUsers();
 
 public:
     Menu();
-    Menu(const Menu& other);
-    Menu& operator=(const Menu& other);
-    ~Menu();
+    Menu(const Menu&) = delete;
+    Menu& operator=(const Menu&) = delete;
+    ~Menu() = default;
 
     void run();
 

@@ -1,14 +1,14 @@
 #include "../Hearthstone/Adept.h"
-#include <stdexcept>
+#include "../Hearthstone/Exceptions.h"
 #include <iostream>
 
 void Adept::setAttack(int atk) {
-    if (atk < 0) throw std::invalid_argument("Attack cannot be negative");
+    if (atk < 0) throw HearthstoneException("Attack cannot be negative");
     attack = atk;
 }
 
 void Adept::setMaxHealth(int hp) {
-    if (hp <= 0) throw std::invalid_argument("Health must be positive");
+    if (hp <= 0) throw HearthstoneException("Health must be positive");
     maxHealth = hp;
     currentHealth = hp;
 }
@@ -21,33 +21,17 @@ Adept::Adept(const std::string& name, int manaCost, int atk, int health)
     setMaxHealth(health);
 }
 
-Adept::Adept(const Adept& other)
-    : Card(other), attack(other.attack), maxHealth(other.maxHealth), currentHealth(other.currentHealth) {}
-
-Adept& Adept::operator=(const Adept& other) {
-    if (this != &other) {
-        Card::operator=(other);
-        attack = other.attack;
-        maxHealth = other.maxHealth;
-        currentHealth = other.currentHealth;
-    }
-    return *this;
-}
-
-Adept::~Adept() {}
-
 int Adept::getAttack() const { return attack; }
 int Adept::getCurrentHealth() const { return currentHealth; }
 int Adept::getMaxHealth() const { return maxHealth; }
+bool Adept::isAlive() const { return currentHealth > 0; }
 
 void Adept::takeDamage(int amount) {
     if (amount < 0) return;
     currentHealth -= amount;
 }
 
-void Adept::healToMax() {
-    currentHealth = maxHealth;
-}
+void Adept::healToMax() { currentHealth = maxHealth; }
 
 void Adept::buffAttack(int amount) {
     if (amount < 0) return;
@@ -60,17 +44,12 @@ void Adept::buffHealth(int amount) {
     currentHealth += amount;
 }
 
-bool Adept::isAlive() const {
-    return currentHealth > 0;
-}
-
 void Adept::play() {
     std::cout << "  >> Adept [" << getName() << "] intra pe tabla! ("
               << attack << "/" << currentHealth << ")\n";
 }
 
 std::string Adept::getType() const { return "Adept"; }
-
 Card* Adept::clone() const { return new Adept(*this); }
 
 void Adept::display(std::ostream& os) const {
@@ -81,10 +60,8 @@ void Adept::display(std::ostream& os) const {
 void Adept::read(std::istream& is) {
     Card::read(is);
     int atk, hp;
-    std::cout << "  Attack: ";
-    is >> atk;
-    std::cout << "  Health: ";
-    is >> hp;
+    std::cout << "  Attack: "; is >> atk;
+    std::cout << "  Health: "; is >> hp;
     setAttack(atk);
     setMaxHealth(hp);
 }

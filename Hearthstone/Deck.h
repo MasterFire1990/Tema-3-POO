@@ -1,6 +1,7 @@
 #pragma once
 #include "Card.h"
 #include <vector>
+#include <memory>
 #include <string>
 #include <algorithm>
 #include <random>
@@ -8,19 +9,18 @@
 class Deck {
     std::string deckName;
     std::string ownerUsername;
-    std::vector<Card*> cards;
+    std::vector<std::unique_ptr<Card>> cards;
 
     static const int MAX_CARDS = 30;
-
-    void clearCards();
-    void copyCards(const std::vector<Card*>& src);
 
 public:
     Deck();
     Deck(const std::string& deckName, const std::string& ownerUsername);
     Deck(const Deck& other);
     Deck& operator=(const Deck& other);
-    ~Deck();
+    Deck(Deck&&) = default;
+    Deck& operator=(Deck&&) = default;
+    ~Deck() = default;
 
     std::string getDeckName() const;
     std::string getOwnerUsername() const;
@@ -28,9 +28,9 @@ public:
     bool isEmpty() const;
     bool isFull() const;
 
-    void addCard(Card* card);
+    void addCard(const Card& card);
     void removeCard(int index);
-    Card* drawCard();
+    std::unique_ptr<Card> drawCard();
     void shuffle();
 
     void saveToFile(const std::string& filename) const;

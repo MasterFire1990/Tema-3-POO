@@ -18,9 +18,9 @@ protected:
 public:
     Spell();
     Spell(const std::string& name, int manaCost, SpellEffect effect, int value);
-    Spell(const Spell& other);
-    Spell& operator=(const Spell& other);
-    ~Spell() override;
+    Spell(const Spell& other) = default;
+    Spell& operator=(const Spell& other) = default;
+    ~Spell() override = default;
 
     SpellEffect getEffect() const;
     int getValue() const;

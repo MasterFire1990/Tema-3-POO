@@ -13,9 +13,9 @@ protected:
 public:
     Adept();
     Adept(const std::string& name, int manaCost, int attack, int health);
-    Adept(const Adept& other);
-    Adept& operator=(const Adept& other);
-    ~Adept() override;
+    Adept(const Adept& other) = default;
+    Adept& operator=(const Adept& other) = default;
+    ~Adept() override = default;
 
     int getAttack() const;
     int getCurrentHealth() const;

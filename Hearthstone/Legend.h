@@ -10,12 +10,12 @@ class Legend : public Adept, public Spell {
 public:
     Legend();
     Legend(const std::string& name, int manaCost,
-             int attack, int health,
-             SpellEffect spellEffect, int spellValue,
-             const std::string& title);
-    Legend(const Legend& other);
-    Legend& operator=(const Legend& other);
-    ~Legend() override;
+           int attack, int health,
+           SpellEffect spellEffect, int spellValue,
+           const std::string& title);
+    Legend(const Legend& other) = default;
+    Legend& operator=(const Legend& other) = default;
+    ~Legend() override = default;
 
     std::string getTitle() const;
 

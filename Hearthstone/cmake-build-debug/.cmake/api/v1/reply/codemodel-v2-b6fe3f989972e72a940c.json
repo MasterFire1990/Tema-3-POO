@@ -10,7 +10,7 @@
 					"jsonFile" : "directory-.-Debug-f6f22219c74102c3da70.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "4.1"
+						"string" : "3.20"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -39,9 +39,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "Hearthstone::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Hearthstone-Debug-dea6fd238b781c1aaee7.json",
-					"name" : "Hearthstone",
+					"id" : "hearthstone::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hearthstone-Debug-09f301d20b35aa989280.json",
+					"name" : "hearthstone",
 					"projectIndex" : 0
 				}
 			]
@@ -50,8 +50,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 2/Tema-2-POO/Hearthstone/cmake-build-debug",
-		"source" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 2/Tema-2-POO/Hearthstone"
+		"build" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone/cmake-build-debug",
+		"source" : "C:/Users/Adrian/Desktop/Facultate_ore_de_Curs-Lab/Semestrul 2/POO/Proiect Tema 3/Tema-3-POO/Hearthstone"
 	},
 	"version" : 
 	{

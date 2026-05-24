@@ -3,30 +3,35 @@
 #include "Player.h"
 #include "Deck.h"
 #include "User.h"
-#include "CardCollection.h"
 #include "Spell.h"
+#include "IGameObserver.h"
 #include <vector>
+#include <memory>
 #include <string>
+#include <functional>
 
 class GameEngine {
-    Player* players[2];
-    Deck* decks[2];
-    std::vector<Card*> hands[2];
-    Board* board;
+    std::unique_ptr<Player> players[2];
+    std::unique_ptr<Deck>   decks[2];
+    std::vector<std::unique_ptr<Card>> hands[2];
+    std::unique_ptr<Board>  board;
+
+    // Observer pattern — weak_ptr to avoid owning the logger
+    std::vector<std::weak_ptr<IGameObserver>> observers;
+
     int currentMana[2];
     int maxMana[2];
     int currentTurn;
     bool gameOver;
     int winner;
 
-    static const int MAX_HAND_SIZE = 10;
+    static const int MAX_HAND_SIZE      = 10;
     static const int STARTING_HAND_SIZE = 3;
 
     void clearHands();
     void drawCard(int side);
     void dealStartingHands();
     void incrementMana(int side);
-    void restoreMana(int side);
 
     void applySpellEffect(Spell* spell, int casterSide);
     void applyBuffToMinions(int side, SpellEffect effect, int value);
@@ -37,15 +42,21 @@ class GameEngine {
     void printHand(int side) const;
     void printMana(int side) const;
 
+    void notifyObservers(std::function<void(IGameObserver&)> fn);
+
 public:
     GameEngine();
     GameEngine(User* user0, Deck* deck0, User* user1, Deck* deck1);
     GameEngine(const GameEngine& other);
     GameEngine& operator=(const GameEngine& other);
-    ~GameEngine();
+    GameEngine(GameEngine&&) = default;
+    GameEngine& operator=(GameEngine&&) = default;
+    ~GameEngine() = default;
+
+    void addObserver(std::weak_ptr<IGameObserver> obs);
 
     bool isGameOver() const;
-    int getWinner() const;
+    int  getWinner()  const;
 
     void startGame();
     void processTurn();

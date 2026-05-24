@@ -1,30 +1,32 @@
-cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 3.20)
 project(Hearthstone)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(Hearthstone main.cpp
+set(SOURCES
+        main.cpp
         Card.cpp
-        Card.h
         Adept.cpp
-        Adept.h
         Spell.cpp
-        Spell.h
         Legend.cpp
-        Legend.h
-        User.cpp
-        User.h
-        CardCollection.cpp
-        CardCollection.h
         Player.cpp
-        Player.h
-        Board.cpp
-        Board.h
-        GameEngine.cpp
-        GameEngine.h
-        Menu.cpp
-        Menu.h
-        Card.cpp
-        Card.h
         Deck.cpp
-        Deck.h)
+        User.cpp
+        CardCollection.cpp
+        Board.cpp
+        GameEngine.cpp
+        GameLogger.cpp
+        CardFactory.cpp
+        Menu.cpp
+)
+
+add_executable(hearthstone ${SOURCES})
+
+target_include_directories(hearthstone PRIVATE ${CMAKE_SOURCE_DIR})
+
+if(MSVC)
+    target_compile_options(hearthstone PRIVATE /W4 /std:c++20)
+else()
+    target_compile_options(hearthstone PRIVATE -Wall -Wextra -Wpedantic)
+endif()
